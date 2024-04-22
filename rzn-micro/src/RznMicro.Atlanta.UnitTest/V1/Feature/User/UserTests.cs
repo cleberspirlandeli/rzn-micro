@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace RznMicro.Atlanta.UnitTests.V1.Feature.User;
+﻿namespace RznMicro.Atlanta.UnitTests.V1.Feature.User;
 
 [CollectionDefinition(nameof(UserCollection))]
 

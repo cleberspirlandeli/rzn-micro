@@ -1,7 +1,5 @@
-﻿using Bogus;
-using RznMicro.Atlanta.Feature.User.Model;
+﻿using RznMicro.Atlanta.Feature.User.Model;
 using RznMicro.Atlanta.Feature.User.Request;
-using Xunit;
 
 namespace RznMicro.Atlanta.UnitTests.V1.Feature.User;
 
@@ -24,7 +22,7 @@ public class UserFixture : IDisposable
     public AddUserRequest GenerateAddUserRequest()
     {
         return new Faker<AddUserRequest>("pt_BR")
-            .CustomInstantiator(f => new AddUserRequest())
+            .CustomInstantiator(f => new AddUserRequest(f.Name.FirstName(), f.Date.Past(10)))
             .Generate();
     }
 
