@@ -4,5 +4,6 @@ namespace RznMicro.Atlanta.Contract.Feature.User;
 
 public class AddUserCommand : ICommand<AddUserCommandResult>
 {
-    public int TesteInputCommand { get; set; }
+    public string Name { get; set; }
+    public DateTime Age { get; set; }
 }

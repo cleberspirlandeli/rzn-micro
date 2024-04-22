@@ -1,7 +1,7 @@
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RznMicro.Atlanta.Contract.Feature.User;
 using RznMicro.Atlanta.Core.RequestContext;
+using System.Net;
 
 namespace A.API.Controllers
 {
@@ -19,7 +19,7 @@ namespace A.API.Controllers
         }
 
         [HttpPost(Name = "GetWeatherForecast")]
-        //[ProducesResponseType(typeof(AddUserQueryResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(AddUserCommandResult), (int)HttpStatusCode.OK)]
         //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Get([FromBody] AddUserCommand command)

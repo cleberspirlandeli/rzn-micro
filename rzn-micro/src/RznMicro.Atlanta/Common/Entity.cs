@@ -1,4 +1,4 @@
-﻿namespace RznMicro.Atlanta;
+﻿namespace RznMicro.Atlanta.Common;
 
 public abstract class Entity
 {
@@ -8,7 +8,7 @@ public abstract class Entity
     {
         Id = Guid.NewGuid();
     }
-    
+
     public virtual void SetId(Guid id)
     {
         Id = id;
