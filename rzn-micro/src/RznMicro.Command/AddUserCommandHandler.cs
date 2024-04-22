@@ -1,5 +1,4 @@
-﻿using MediatR;
-using RznMicro.Atlanta.Contract.Feature.User;
+﻿using RznMicro.Atlanta.Contract.Feature.User;
 using RznMicro.Atlanta.Core.RequestContext;
 
 namespace RznMicro.Atlanta.Command;
