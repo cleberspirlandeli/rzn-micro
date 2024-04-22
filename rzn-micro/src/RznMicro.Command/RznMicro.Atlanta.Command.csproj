@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RznMicro.Atlanta.Contract\RznMicro.Atlanta.Contract.csproj" />
+    <ProjectReference Include="..\RznMicro.Atlanta.Core\RznMicro.Atlanta.Core.csproj" />
+  </ItemGroup>
+
+</Project>
