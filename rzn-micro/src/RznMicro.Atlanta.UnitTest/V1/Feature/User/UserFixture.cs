@@ -8,10 +8,10 @@ public class UserCollection : ICollectionFixture<UserFixture> { }
 
 public class UserFixture : IDisposable
 {
-    public UserModel GenerateUserModelModel()
+    public UserEntity GenerateUserModelModel()
     {
-        return new Faker<UserModel>("pt_BR")
-            .CustomInstantiator(f => new UserModel(
+        return new Faker<UserEntity>("pt_BR")
+            .CustomInstantiator(f => new UserEntity(
                 f.Name.FirstName(),
                 f.Date.Past(10),
                 f.Random.Bool()
@@ -22,7 +22,14 @@ public class UserFixture : IDisposable
     public AddUserRequest GenerateAddUserRequest()
     {
         return new Faker<AddUserRequest>("pt_BR")
-            .CustomInstantiator(f => new AddUserRequest(f.Name.FirstName(), f.Date.Past(10)))
+            .CustomInstantiator(f => new AddUserRequest
+            {
+                User = new UserRequest
+                {
+                    FullName = f.Name.FirstName(),
+                    DateBirth = f.Date.Past(10)
+                }
+            })
             .Generate();
     }
 

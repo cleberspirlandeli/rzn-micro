@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RznMicro.Atlanta.Core", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RznMicro.Atlanta.UnitTests", "src\RznMicro.Atlanta.UnitTest\RznMicro.Atlanta.UnitTests.csproj", "{43FF1232-D3E6-45F3-BDDD-81AEF8AF51ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RznMicro.Atlanta.Database", "src\RznMicro.Atlanta.Database\RznMicro.Atlanta.Database.csproj", "{790939A4-96ED-4484-922E-A05DFD826F24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{43FF1232-D3E6-45F3-BDDD-81AEF8AF51ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43FF1232-D3E6-45F3-BDDD-81AEF8AF51ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43FF1232-D3E6-45F3-BDDD-81AEF8AF51ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{790939A4-96ED-4484-922E-A05DFD826F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{790939A4-96ED-4484-922E-A05DFD826F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{790939A4-96ED-4484-922E-A05DFD826F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{790939A4-96ED-4484-922E-A05DFD826F24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{FE26FC3C-5E52-4CE8-ADFF-0A22B27AE8D9} = {EBBBC3A5-478C-4F61-BA6F-D497FA93720C}
 		{4A8181B5-695F-4C4E-B01F-581C8E062212} = {18A3ED6C-1EF6-4EE5-BEE6-58465B14D6AF}
 		{43FF1232-D3E6-45F3-BDDD-81AEF8AF51ED} = {FE26FC3C-5E52-4CE8-ADFF-0A22B27AE8D9}
+		{790939A4-96ED-4484-922E-A05DFD826F24} = {95BF27E7-1BAE-4494-820F-109E0CFC100A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A282419D-E23B-48BF-A910-87834F3A25C0}

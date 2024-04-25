@@ -1,5 +1,7 @@
 namespace A.API
 {
+    // https://github.com/public-apis/public-apis
+
     public class WeatherForecast
     {
         public DateOnly Date { get; set; }

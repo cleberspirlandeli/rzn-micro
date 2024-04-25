@@ -29,25 +29,20 @@ public class UserServiceTests : IClassFixture<UserFixture>
         var request = _userFixture.GenerateAddUserRequest();
 
         _mocker.GetMock<IMapper>()
-            .Setup(x => x.Map<UserModel>(It.IsAny<AddUserRequest>()))
+            .Setup(x => x.Map<UserEntity>(It.IsAny<AddUserRequest>()))
             .Returns(model);
-
-        _mocker.GetMock<IUserRepository>()
-          .Setup(x => x.AddAsync(It.IsAny<UserModel>()))
-          .ReturnsAsync(true);
 
         // Action
         var result = await _userService.AddAsync(request);
 
         // Assert
         Assert.NotNull(result);
-        Assert.NotNull(result.Id);
 
         _mocker.GetMock<IMapper>()
-            .Verify(x => x.Map<UserModel>(It.IsAny<AddUserRequest>()), Times.Once);
+            .Verify(x => x.Map<UserEntity>(It.IsAny<AddUserRequest>()), Times.Once);
 
         _mocker.GetMock<IUserRepository>()
-            .Verify(x => x.AddAsync(It.IsAny<UserModel>()), Times.Once);
+            .Verify(x => x.AddAsync(It.IsAny<UserEntity>()), Times.Once);
     }    
     
     [Fact(DisplayName = "Service - Example Method Internal Valid")]

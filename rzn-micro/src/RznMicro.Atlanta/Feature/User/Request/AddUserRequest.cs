@@ -1,13 +1,9 @@
-﻿namespace RznMicro.Atlanta.Feature.User.Request;
+﻿using RznMicro.Atlanta.Feature.Address.Request;
+
+namespace RznMicro.Atlanta.Feature.User.Request;
 
 public class AddUserRequest
 {
-    public string Name { get; set; }
-    public DateTime Age { get; set; }
-
-    public AddUserRequest(string name, DateTime age)
-    {
-        Name = name;
-        Age = age;
-    }
+    public UserRequest User { get; set; }
+    public AddressRequest Address { get; set; }
 }

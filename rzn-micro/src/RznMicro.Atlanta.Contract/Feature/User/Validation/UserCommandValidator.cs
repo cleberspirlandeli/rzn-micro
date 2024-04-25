@@ -6,13 +6,13 @@ public class UserCommandValidator : AbstractValidator<AddUserCommand>
 {
     public UserCommandValidator()
     {
-        RuleFor(x => x.Name)
+        RuleFor(x => x.User.FullName)
             .NotEmpty()
             .MinimumLength(5)
             .MaximumLength(50)
             .WithMessage($"User Name is invalid");
 
-        RuleFor(x => x.Age)
+        RuleFor(x => x.User.DateBirth)
             .NotNull()
             .LessThan(DateTime.Now)
             .GreaterThan(DateTime.Now.AddYears(-100))

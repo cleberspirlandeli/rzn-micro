@@ -25,8 +25,8 @@ public class UserTests : IClassFixture<UserFixture>
         //Assert.False(result.Any());
         Assert.NotNull(user);
         Assert.NotNull(user.Id);
-        Assert.NotNull(user.Name);
-        Assert.NotNull(user.Age);
+        Assert.NotNull(user.FullName);
+        Assert.NotNull(user.DateBirth);
         Assert.NotNull(user.Active);
         Assert.Equal(id, user.Id);
     }

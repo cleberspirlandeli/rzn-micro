@@ -1,5 +1,9 @@
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using RznMicro.Atlanta.Core.RequestContext;
+using RznMicro.Atlanta.Database.Feature;
+using RznMicro.Atlanta.Database.Repository.Feature;
+using RznMicro.Atlanta.Database.UnitOfWork.Feature;
 using RznMicro.Atlanta.Feature.User;
 using System.Reflection;
 
@@ -20,9 +24,17 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies
 // FluentValidation
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
+// MySQL
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContextPool<DefaultDataBaseContext>(opt =>
+{
+    opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
+
 // Services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
 
 // AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

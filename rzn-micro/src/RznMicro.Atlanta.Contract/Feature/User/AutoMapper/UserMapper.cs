@@ -9,14 +9,20 @@ public class UserMapper : Profile
 {
     public UserMapper()
     {
-        CreateMap<AddUserCommand, AddUserRequest>();
-        CreateMap<AddUserResult, AddUserCommandResult>();
+        CreateMap<AddUserCommand, AddUserRequest>()
+            .ForMember(x => x.User, map => 
+                map.MapFrom(m => m.User))
+            .ForMember(x => x.Address, map =>
+                map.MapFrom(m => m.Address))
+            .ReverseMap();
+        
+        CreateMap<AddUserResult, AddUserCommandResult>().ReverseMap();
 
-        CreateMap<AddUserRequest, UserModel>()
-            .ForMember(x => x.Name, map =>
-        map.MapFrom(m => m.Name))
-            .ForMember(x => x.Age, map =>
-        map.MapFrom(m => m.Age));
+        CreateMap<AddUserRequest, UserEntity>()
+            .ForMember(x => x.FullName, map =>
+                map.MapFrom(m => m.User.FullName))
+            .ForMember(x => x.DateBirth, map =>
+                map.MapFrom(m => m.User.DateBirth));
 
         CreateMap<AddUserRequest, AddUserResult>().ReverseMap();
     }
