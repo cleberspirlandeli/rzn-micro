@@ -12,6 +12,6 @@ public class UserUnitOfWork : GenericUnitOfWork, IUserUnitOfWork
     public UserUnitOfWork(DefaultDataBaseContext context, IServiceProvider serviceProvider)
         : base(context, serviceProvider) { }
 
-    public IUserRepository UserRepository => _serviceProvider.GetService<UserRepository>();
-    public IAddressRepository AddressRepository => _serviceProvider.GetService<AddressRepository>();
+    public IUserRepository UserRepository => _serviceProvider.GetService<IUserRepository>();
+    public IAddressRepository AddressRepository => _serviceProvider.GetService<IAddressRepository>();
 }

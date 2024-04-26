@@ -26,6 +26,24 @@ namespace A.API.Controllers
         {
             var response = await _requestContext.ProcessAsync(command);
             return Ok(response);
+
+            /*
+{
+    "user": {
+        "fullName": "Teste Swagger",
+        "dateBirth": "1992-12-18",
+        "active": true,
+        "gender": 0
+    },
+        "address": {
+        "zipCode": "14412444",
+        "street": "Rua teste",
+        "number": 123,
+        "additionalInformation": "Add info",
+        "typeOfAddress": 0
+    }
+}
+             */
         }
     }
 }

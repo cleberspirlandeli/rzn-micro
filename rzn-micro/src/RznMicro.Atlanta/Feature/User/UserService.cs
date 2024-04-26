@@ -14,7 +14,6 @@ public class UserService : IUserService
     private readonly IMapper _mapper;
     private readonly IUserUnitOfWork _uow;
 
-
     public UserService(IMapper mapper, IUserUnitOfWork uow)
     {
         _mapper = mapper;
@@ -25,34 +24,18 @@ public class UserService : IUserService
     {
         ValidateAgeOver18YearsOld(request.User.DateBirth);
 
-        var user = _mapper.Map<UserEntity>(request.User);
-        //var address = _mapper.Map<AddressEntity>(request.Address.FirstOrDefault());
-        //address.IdUser = user.Id;
+        var userEntity = _mapper.Map<UserEntity>(request.User);
+        var addressEntity = _mapper.Map<AddressEntity>(request.Address);
+        addressEntity.IdUser = userEntity.Id;
 
-        await _uow.UserRepository.AddAsync(user);
-        //await _uow.AddressRepository.AddAsync(address);
-        _uow.Rollback();
+        await _uow.UserRepository.AddAsync(userEntity);
+        await _uow.AddressRepository.AddAsync(addressEntity);
+        _uow.Commit();
 
         return new AddUserResult
         {
-            User = new UserResult
-            {
-                Id = user.Id,
-                FullName = user.FullName,
-                DateBirth = user.DateBirth,
-                Active = user.Active,
-                Gender = user.Gender,
-            },
-            Address = new AddressResult
-            {
-                //Id = address.Id,
-                //IdUser = address.IdUser,
-                //ZipCode = address.ZipCode,
-                //Street = address.Street,
-                //Number = address.Number,
-                //AdditionalInformation = address.AdditionalInformation,
-                //TypeOfAddress = address.TypeOfAddress,
-            }
+            User = _mapper.Map<UserResult>(userEntity),
+            Address = _mapper.Map<AddressResult>(addressEntity)
         };
     }
 

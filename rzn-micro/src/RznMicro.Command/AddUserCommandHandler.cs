@@ -23,7 +23,7 @@ public class AddUserCommandHandler : ICommandHandler<AddUserCommand, AddUserComm
         var validation = new UserCommandValidator().Validate(command);
         if (!validation.IsValid) return null;
 
-        var request = _mapper.Map<AddUserRequest>(command); 
+        var request = _mapper.Map<AddUserCommand, AddUserRequest>(command); 
         var result = await _userService.AddAsync(request);
 
         return _mapper.Map<AddUserCommandResult>(result);
