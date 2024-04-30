@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RznMicro.Atlanta.Database.Feature;
-using RznMicro.Atlanta.Database.Repository.Feature;
 using RznMicro.Atlanta.Database.UnitOfWork.Base;
 using RznMicro.Atlanta.Feature.Address;
 using RznMicro.Atlanta.Feature.User;

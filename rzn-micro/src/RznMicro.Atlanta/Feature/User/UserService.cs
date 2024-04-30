@@ -30,7 +30,7 @@ public class UserService : IUserService
 
         await _uow.UserRepository.AddAsync(userEntity);
         await _uow.AddressRepository.AddAsync(addressEntity);
-        _uow.Commit();
+        await _uow.CommitAsync();
 
         return new AddUserResult
         {
