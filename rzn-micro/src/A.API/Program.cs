@@ -1,14 +1,19 @@
+using Amazon;
+using Amazon.DynamoDBv2;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using RznMicro.Atlanta.Common;
+using RznMicro.Atlanta.AwsSQS;
+using RznMicro.Atlanta.Command;
+using RznMicro.Atlanta.Core;
+using RznMicro.Atlanta.Core.AppSetting;
 using RznMicro.Atlanta.Core.RequestContext;
 using RznMicro.Atlanta.Database.Feature;
-using RznMicro.Atlanta.Database.Repository.Base;
 using RznMicro.Atlanta.Database.Repository.Feature;
 using RznMicro.Atlanta.Database.UnitOfWork.Feature;
+using RznMicro.Atlanta.DynamoDB.Repository.Feature;
 using RznMicro.Atlanta.Feature.Address;
 using RznMicro.Atlanta.Feature.User;
-using System.Reflection;
+using RznMicro.Atlanta.Query;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +26,8 @@ builder.Services.AddSwaggerGen();
 
 // RequestContext MediatR
 builder.Services.AddScoped<IRequestContext, RequestContext>();
-var assemblies = Assembly.Load("RznMicro.Atlanta.Command");
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
+builder.Services.AddApplicationCommand();
+builder.Services.AddApplicationQuery();
 
 // FluentValidation
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
@@ -35,11 +40,20 @@ builder.Services.AddDbContextPool<DefaultDataBaseContext>(opt =>
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+// IOptions
+var configOptions = builder.Configuration.GetSection(AppSettings.KeyName);
+builder.Services.Configure<AppSettings>(configOptions);
+
+// DynamoDB
+builder.Services.AddSingleton<AmazonDynamoDBClient>(_ => new AmazonDynamoDBClient(RegionEndpoint.USEast1));
+builder.Services.AddScoped<IUserQueryRepository, UserQueryRepository>();
+
 // Services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
+builder.Services.AddScoped<IPublisherQueue, PublisherQueue>();
 
 // AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

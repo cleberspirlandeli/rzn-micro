@@ -22,7 +22,7 @@ namespace A.API.Controllers
         [ProducesResponseType(typeof(AddUserCommandResult), (int)HttpStatusCode.OK)]
         //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Get([FromBody] AddUserCommand command)
+        public async Task<IActionResult> Post([FromBody] AddUserCommand command)
         {
             var response = await _requestContext.ProcessAsync(command);
             return Ok(response);
@@ -44,6 +44,16 @@ namespace A.API.Controllers
     }
 }
              */
+        }
+
+        [HttpGet("id:guid")]
+        [ProducesResponseType(typeof(AddUserCommandResult), (int)HttpStatusCode.OK)]
+        //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Get([FromQuery] GetUserByIdQuery query)
+        {
+            var response = await _requestContext.ProcessAsync(query);
+            return Ok(response);
         }
     }
 }

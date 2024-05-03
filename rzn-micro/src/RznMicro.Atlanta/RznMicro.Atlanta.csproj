@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RznMicro.Atlanta.Core\RznMicro.Atlanta.Core.csproj" />
     <ProjectReference Include="..\RznMicro.Atlanta.Enumerable\RznMicro.Atlanta.Enumerable.csproj" />
   </ItemGroup>
 
