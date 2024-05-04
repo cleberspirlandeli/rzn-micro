@@ -14,6 +14,7 @@ using RznMicro.Atlanta.DynamoDB.Repository.Feature;
 using RznMicro.Atlanta.Feature.Address;
 using RznMicro.Atlanta.Feature.User;
 using RznMicro.Atlanta.Query;
+using RznMicro.Atlanta.Query.Feature.User;
 
 var builder = WebApplication.CreateBuilder(args);
 

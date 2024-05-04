@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using RznMicro.Atlanta.Contract.Feature.User.Command;
 using RznMicro.Atlanta.Contract.Feature.User.Message;
+using RznMicro.Atlanta.Contract.Feature.User.Request;
+using RznMicro.Atlanta.Contract.Feature.User.Result;
 using RznMicro.Atlanta.Feature.Address.Result;
 using RznMicro.Atlanta.Feature.User.Model;
 using RznMicro.Atlanta.Feature.User.Request;

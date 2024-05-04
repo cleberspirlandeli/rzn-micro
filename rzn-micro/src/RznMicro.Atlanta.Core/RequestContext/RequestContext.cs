@@ -16,6 +16,11 @@ public class RequestContext : IRequestContext
         return await _mediator.Send(commandRequest);
     }
 
+    public async Task<TQueryResult> QueryAsync<TQueryResult>(IQuery<TQueryResult> queryRequest) where TQueryResult : IQueryResult, new()
+    {
+        return await _mediator.Send(queryRequest);
+    }
+
     //public async Task PublishEvent<T>(T ev) where T : Event
     //{
     //    await _mediator.Publish(ev);

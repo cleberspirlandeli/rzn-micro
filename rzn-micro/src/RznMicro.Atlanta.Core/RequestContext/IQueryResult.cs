@@ -1,5 +1,5 @@
 ﻿namespace RznMicro.Atlanta.Core.RequestContext;
 
-public interface ICommandResult : IMessage
+public interface IQueryResult : IMessage
 {
 }

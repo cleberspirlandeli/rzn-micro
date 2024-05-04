@@ -5,12 +5,12 @@ using RznMicro.Atlanta.Core.RequestContext;
 
 namespace RznMicro.Atlanta.Query.Feature.User;
 
-public sealed class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, GetUserQueryResult>
+public sealed class GetUserByFilterQueryHandler : IQueryHandler<GetUserByFilterQuery, GetUserByFilterQueryResult>
 {
     private readonly IMapper _mapper;
     private readonly IUserQueryRepository _userQueryRepository;
 
-    public GetUserByIdQueryHandler(
+    public GetUserByFilterQueryHandler(
         IMapper mapper, 
         IUserQueryRepository userQueryRepository)
     {
@@ -18,9 +18,15 @@ public sealed class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, Ge
         _userQueryRepository = userQueryRepository;
     }
 
-    public async Task<GetUserQueryResult> Handle(GetUserByIdQuery query, CancellationToken cancellationToken)
+    public async Task<GetUserByFilterQueryResult> Handle(GetUserByFilterQuery request, CancellationToken cancellationToken)
     {
-        var result = await _userQueryRepository.GetByIdAsync(query.IdUser);
-        return result;
+        var result = await _userQueryRepository.GetAllAsync();
+
+        var x = new GetUserByFilterQueryResult
+        {
+            Users = result
+        };
+
+        return x;
     }
 }

@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RznMicro.Atlanta\RznMicro.Atlanta.csproj" />
+    <ProjectReference Include="..\RznMicro.Atlanta.Contract\RznMicro.Atlanta.Contract.csproj" />
+    <ProjectReference Include="..\RznMicro.Atlanta.Query\RznMicro.Atlanta.Query.csproj" />
   </ItemGroup>
 
 </Project>

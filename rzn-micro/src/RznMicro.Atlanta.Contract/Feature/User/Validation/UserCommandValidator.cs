@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using RznMicro.Atlanta.Contract.Feature.User.Command;
+using RznMicro.Atlanta.Contract.Feature.User.Request;
 
 namespace RznMicro.Atlanta.Contract.Feature.User.Validation;
 

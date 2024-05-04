@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using RznMicro.Atlanta.Contract.Feature.User;
+using RznMicro.Atlanta.Contract.Feature.User.Command;
+using RznMicro.Atlanta.Contract.Feature.User.Query;
+using RznMicro.Atlanta.Contract.Feature.User.Result;
 using RznMicro.Atlanta.Core.RequestContext;
 using System.Net;
 
@@ -47,12 +49,22 @@ namespace A.API.Controllers
         }
 
         [HttpGet("id:guid")]
-        [ProducesResponseType(typeof(AddUserCommandResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(GetUserQueryResult), (int)HttpStatusCode.OK)]
         //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Get([FromQuery] GetUserByIdQuery query)
         {
-            var response = await _requestContext.ProcessAsync(query);
+            var response = await _requestContext.QueryAsync(query);
+            return Ok(response);
+        }        
+        
+        [HttpGet("")]
+        [ProducesResponseType(typeof(GetUserQueryResult), (int)HttpStatusCode.OK)]
+        //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        //[ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Get([FromQuery] GetUserByFilterQuery query)
+        {
+            var response = await _requestContext.QueryAsync(query);
             return Ok(response);
         }
     }

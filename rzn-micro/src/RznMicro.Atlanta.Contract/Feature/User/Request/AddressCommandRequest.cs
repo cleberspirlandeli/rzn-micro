@@ -1,6 +1,6 @@
 ﻿using RznMicro.Atlanta.Enumerable;
 
-namespace RznMicro.Atlanta.Contract.Feature.User;
+namespace RznMicro.Atlanta.Contract.Feature.User.Request;
 
 public class AddressCommandRequest
 {

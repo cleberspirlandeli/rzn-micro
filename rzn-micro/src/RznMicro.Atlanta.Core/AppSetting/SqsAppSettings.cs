@@ -2,5 +2,7 @@
 
 public class SqsAppSettings
 {
-    public QueueAppSettings User { get; set; }
+    public QueueAppSettings AddUser { get; set; }
+    public QueueAppSettings UpdateUser { get; set; }
+    public QueueAppSettings RemoveUser { get; set; }
 }

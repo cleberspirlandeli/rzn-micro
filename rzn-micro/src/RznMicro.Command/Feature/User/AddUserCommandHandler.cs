@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
-using RznMicro.Atlanta.Contract.Feature.User;
+using RznMicro.Atlanta.Contract.Feature.User.Command;
 using RznMicro.Atlanta.Contract.Feature.User.Message;
+using RznMicro.Atlanta.Contract.Feature.User.Result;
 using RznMicro.Atlanta.Contract.Feature.User.Validation;
 using RznMicro.Atlanta.Core;
 using RznMicro.Atlanta.Core.AppSetting;
@@ -42,7 +43,7 @@ public sealed class AddUserCommandHandler : ICommandHandler<AddUserCommand, AddU
         var result = await _userService.AddAsync(request);
 
         var message = _mapper.Map<AddUserResult, AddUserMessage>(result);
-        await _publisherQueue.PublishAsync(_appSettings.AWS.SQS.User.QueueUrl, message);
+        await _publisherQueue.PublishAsync(_appSettings.AWS.SQS.AddUser.QueueUrl, message);
 
         return _mapper.Map<AddUserCommandResult>(result);
     }

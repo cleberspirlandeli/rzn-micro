@@ -2,7 +2,7 @@
 using RznMicro.Atlanta.Feature.Address.Result;
 using RznMicro.Atlanta.Feature.User.Result;
 
-namespace RznMicro.Atlanta.Contract.Feature.User;
+namespace RznMicro.Atlanta.Contract.Feature.User.Result;
 
 public class AddUserCommandResult : ICommandResult
 {
