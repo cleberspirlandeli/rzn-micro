@@ -3,6 +3,7 @@ using RznMicro.Atlanta.Contract.Feature.User.Command;
 using RznMicro.Atlanta.Contract.Feature.User.Message;
 using RznMicro.Atlanta.Contract.Feature.User.Request;
 using RznMicro.Atlanta.Contract.Feature.User.Result;
+using RznMicro.Atlanta.Contract.Feature.User.Schema;
 using RznMicro.Atlanta.Feature.Address.Result;
 using RznMicro.Atlanta.Feature.User.Model;
 using RznMicro.Atlanta.Feature.User.Request;
@@ -45,5 +46,9 @@ public class UserMapper : Profile
         CreateMap<UserCommandRequest, UserRequest>().ReverseMap();
         CreateMap<UserRequest, UserEntity>().ReverseMap();
         CreateMap<UserEntity, UserResult>().ReverseMap();
+        CreateMap<UserEntity, UserResult>().ReverseMap();
+
+        // TODO: Create AutoMapper for DynamoDB
+        //CreateMap<List<UserSchema>, GetUserByFilterQueryResult>();
     }
 }

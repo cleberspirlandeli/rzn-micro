@@ -6,7 +6,6 @@ using RznMicro.Atlanta.Feature.User.Model;
 namespace RznMicro.Atlanta.Database.Repository.Feature;
 
 public class UserRepository : GenericRepository<UserEntity, DefaultDataBaseContext>, IUserRepository
-// IGenericRepository<TEntity> where TEntity : Entity
 {
     public UserRepository(DefaultDataBaseContext context) : base(context) { }
 

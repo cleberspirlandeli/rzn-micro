@@ -1,6 +1,5 @@
 ﻿using RznMicro.Atlanta.Contract.Feature.User.Result;
 using RznMicro.Atlanta.Core.RequestContext;
-using System.ComponentModel.DataAnnotations;
 
 namespace RznMicro.Atlanta.Contract.Feature.User.Query;
 

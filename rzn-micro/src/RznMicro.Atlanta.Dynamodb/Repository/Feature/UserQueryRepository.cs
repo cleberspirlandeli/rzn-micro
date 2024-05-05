@@ -1,62 +1,48 @@
-﻿using Amazon;
-using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.DataModel;
+﻿using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
-using Amazon.DynamoDBv2.Model;
 using Microsoft.Extensions.Options;
-using RznMicro.Atlanta.Contract.Feature.User.Result;
+using RznMicro.Atlanta.Contract.Feature.User.Request;
+using RznMicro.Atlanta.Contract.Feature.User.Schema;
 using RznMicro.Atlanta.Core.AppSetting;
+using RznMicro.Atlanta.DynamoDB.Configurations;
 using RznMicro.Atlanta.Query.Feature.User;
-using System.Text.Json;
 
 namespace RznMicro.Atlanta.DynamoDB.Repository.Feature;
 
-public class UserQueryRepository : IUserQueryRepository
+public class UserQueryRepository : GenericDynamoDBContext, IUserQueryRepository
 {
-    private readonly AppSettings _appSettings;
-    private readonly AmazonDynamoDBClient _amazonDynamoDBClient;
     private const string TableName = "users";
 
-    public UserQueryRepository(
-        IOptions<AppSettings> appSettings)
+    public UserQueryRepository(IOptions<AppSettings> appSettings) :base(appSettings) { } 
+
+    public async Task<UserSchema> GetByIdAsync(Guid id)
     {
-        _appSettings = appSettings.Value;
-        _amazonDynamoDBClient = new AmazonDynamoDBClient(_appSettings.AWS.Credentials.AccessKey, _appSettings.AWS.Credentials.SecretAccessKey, RegionEndpoint.USEast1);
-    }
-
-    public async Task<GetUserQueryResult> GetByIdAsync(Guid id)
-    {
-        var request = new GetItemRequest
-        {
-            TableName = TableName,
-            Key = new Dictionary<string, AttributeValue>
-            {
-                { "id", new AttributeValue { S = id.ToString().ToUpper() } }
-            },
-            
-        };
-
-        var response = await _amazonDynamoDBClient.GetItemAsync(request);
-        if (response.Item.Count == 0)
-            return null;
-
-        var itemAsDocument = Document.FromAttributeMap(response.Item);
-        var result = JsonSerializer.Deserialize<GetUserQueryResult>(itemAsDocument.ToJson());
-
+        var result = await _dynamoDBContext.LoadAsync<UserSchema>(id.ToString().ToUpper());
         return result;
     }
 
-    public async Task<IEnumerable<GetUserQueryResult>> GetAllAsync()
+    public async Task<List<UserSchema>> GetAllByFilterAsync(GetAllByFilterQueryRequest request)
     {
-        DynamoDBContext context = new DynamoDBContext(_amazonDynamoDBClient);
-
-        var conditions = new List<ScanCondition>();
-        //conditions.Add(new ScanCondition("FullName", ScanOperator.Contains, "reb"));
-        //conditions.Add(new ScanCondition("Number", ScanOperator.Equal, 1500));
-
-        var search = context.ScanAsync<GetUserQueryResult>(conditions);
+        var conditions = GenerateFilter(request);
+        var search = _dynamoDBContext.ScanAsync<UserSchema>(conditions);
         var results = await search.GetRemainingAsync();
 
         return results;
+    }
+
+    private List<ScanCondition> GenerateFilter(GetAllByFilterQueryRequest request)
+    {
+        var conditions = new List<ScanCondition>();
+
+        if (request.IdUser is not null)
+            conditions.Add(new ScanCondition(nameof(UserSchema.IdUser), ScanOperator.Equal, request.IdUser?.ToString().ToUpper()));
+
+        if (request.IdAddress is not null)
+            conditions.Add(new ScanCondition(nameof(UserSchema.IdAddress), ScanOperator.Equal, request.IdAddress?.ToString().ToUpper()));
+
+        if (!string.IsNullOrEmpty(request.FullName))
+            conditions.Add(new ScanCondition(nameof(UserSchema.FullNameSearch), ScanOperator.Contains, request.FullName.ToString().ToUpper()));
+
+        return conditions;
     }
 }

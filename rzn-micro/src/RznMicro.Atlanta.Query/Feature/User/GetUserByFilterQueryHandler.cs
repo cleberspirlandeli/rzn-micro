@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
+using RznMicro.Atlanta.Contract.Feature.Address.Result;
 using RznMicro.Atlanta.Contract.Feature.User.Query;
+using RznMicro.Atlanta.Contract.Feature.User.Request;
 using RznMicro.Atlanta.Contract.Feature.User.Result;
 using RznMicro.Atlanta.Core.RequestContext;
+using RznMicro.Atlanta.Enumerable;
+using System.Globalization;
 
 namespace RznMicro.Atlanta.Query.Feature.User;
 
@@ -18,15 +22,40 @@ public sealed class GetUserByFilterQueryHandler : IQueryHandler<GetUserByFilterQ
         _userQueryRepository = userQueryRepository;
     }
 
-    public async Task<GetUserByFilterQueryResult> Handle(GetUserByFilterQuery request, CancellationToken cancellationToken)
+    public async Task<GetUserByFilterQueryResult> Handle(GetUserByFilterQuery query, CancellationToken cancellationToken)
     {
-        var result = await _userQueryRepository.GetAllAsync();
-
-        var x = new GetUserByFilterQueryResult
+        var request = new GetAllByFilterQueryRequest
         {
-            Users = result
+            IdUser = query.IdUser,
+            IdAddress = query.IdAddress,
+            FullName = query.FullName,
         };
 
-        return x;
+        var userList = await _userQueryRepository.GetAllByFilterAsync(request);
+
+        var userQueryResult = userList.Select(x => new GetUserQueryResult
+        {
+            User = new UserQueryResult
+            {
+                Id = new Guid(x.IdUser),
+                FullName = x.FullName,
+                DateBirth = DateTime.ParseExact(x.DateBirth, "yyyy/MM/dd", CultureInfo.InvariantCulture),
+                Active = x.Active,
+                Gender = x?.Gender is not null ? (GenderEnum)x.Gender : null,
+            },
+            Address = new AddressQueryResult
+            {
+                Id = x.IdAddress,
+                IdUser = x.IdUser,
+                Street = x.Street,
+                Number = x.Number,
+                ZipCode = x.ZipCode,
+                AdditionalInformation = x.AdditionalInformation,
+                TypeOfAddress = x?.TypeOfAddress is not null ? (TypeOfAddressEnum)x.TypeOfAddress : null,
+            }
+        });
+
+        var result = new GetUserByFilterQueryResult(userQueryResult);
+        return result;
     }
 }

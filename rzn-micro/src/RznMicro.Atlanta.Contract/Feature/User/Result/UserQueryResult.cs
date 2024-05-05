@@ -1,21 +1,22 @@
-﻿using Amazon.DynamoDBv2.DataModel;
+﻿using RznMicro.Atlanta.Enumerable;
+using System.Text.Json.Serialization;
 
 namespace RznMicro.Atlanta.Contract.Feature.User.Result;
 
 public record UserQueryResult
 {
-    [DynamoDBProperty("id")]
-    public string Id { get; set; }
+    [JsonPropertyName("id")]
+    public Guid Id { get; set; }
 
-    [DynamoDBProperty("fullName")]
+    [JsonPropertyName("fullName")]
     public string FullName { get; set; }
 
-    [DynamoDBProperty("dateBirth")]
-    public string DateBirth { get; set; }
+    [JsonPropertyName("dateBirth")]
+    public DateTime DateBirth { get; set; }
 
-    [DynamoDBProperty("active")]
+    [JsonPropertyName("active")]
     public bool? Active { get; set; }
 
-    [DynamoDBProperty("gender")]
-    public int? Gender { get; set; }
+    [JsonPropertyName("gender")]
+    public GenderEnum? Gender { get; set; }
 }

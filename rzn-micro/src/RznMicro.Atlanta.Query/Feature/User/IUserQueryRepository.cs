@@ -1,10 +1,11 @@
-﻿using RznMicro.Atlanta.Contract.Feature.User.Result;
+﻿using RznMicro.Atlanta.Contract.Feature.User.Request;
+using RznMicro.Atlanta.Contract.Feature.User.Schema;
 
 namespace RznMicro.Atlanta.Query.Feature.User;
 
 public interface IUserQueryRepository
 {
-    Task<GetUserQueryResult> GetByIdAsync(Guid id);
+    Task<UserSchema> GetByIdAsync(Guid id);
 
-    Task<IEnumerable<GetUserQueryResult>> GetAllAsync();
+    Task<List<UserSchema>> GetAllByFilterAsync(GetAllByFilterQueryRequest request);
 }

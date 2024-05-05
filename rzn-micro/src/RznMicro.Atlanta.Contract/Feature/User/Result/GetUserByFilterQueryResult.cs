@@ -2,7 +2,14 @@
 
 namespace RznMicro.Atlanta.Contract.Feature.User.Result;
 
-public sealed class GetUserByFilterQueryResult : IQueryResult
+public class GetUserByFilterQueryResult : IQueryResult
 {
     public IEnumerable<GetUserQueryResult> Users { get; set; }
+
+    public GetUserByFilterQueryResult(IEnumerable<GetUserQueryResult> users)
+    {
+        Users = users;
+    }
+
+    public GetUserByFilterQueryResult() { }
 }
