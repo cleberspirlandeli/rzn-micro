@@ -2,10 +2,12 @@ using Amazon;
 using Amazon.DynamoDBv2;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using RznMicro.Atlanta.AwsS3;
 using RznMicro.Atlanta.AwsSQS;
 using RznMicro.Atlanta.Command;
-using RznMicro.Atlanta.Core;
 using RznMicro.Atlanta.Core.AppSetting;
+using RznMicro.Atlanta.Core.AWS.S3;
+using RznMicro.Atlanta.Core.AWS.SQS;
 using RznMicro.Atlanta.Core.RequestContext;
 using RznMicro.Atlanta.Database.Feature;
 using RznMicro.Atlanta.Database.Repository.Feature;
@@ -54,7 +56,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
-builder.Services.AddScoped<IPublisherQueue, PublisherQueue>();
+builder.Services.AddScoped<IAwsSQSService, AwsSQSService>();
+builder.Services.AddScoped<IAwsS3Service, AwsS3Service>();
 
 // AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

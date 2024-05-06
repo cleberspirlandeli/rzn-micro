@@ -8,4 +8,6 @@ public interface IUserService
     Task<AddUserResult> AddAsync(AddUserRequest request);
     Task<AlterUserResult> AlterAsync(AlterUserRequest request);
     Task<DeleteUserResult> DeleteAsync(DeleteUserRequest request);
+
+    Task<ImageUploadResult> ImageUploadAsync(ImageUploadRequest request);
 }

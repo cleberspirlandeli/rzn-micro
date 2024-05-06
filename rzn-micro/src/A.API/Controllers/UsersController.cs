@@ -8,7 +8,7 @@ using System.Net;
 namespace A.API.Controllers
 {
     [ApiController]
-    [Route("v1/[controller]")]
+    [Route("api/v1/[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly ILogger<UsersController> _logger;
@@ -29,8 +29,6 @@ namespace A.API.Controllers
         {
             var response = await _requestContext.ProcessAsync(command);
             return Ok(response);
-
-           
         }
 
         [HttpGet("id:guid")]
@@ -50,6 +48,16 @@ namespace A.API.Controllers
         public async Task<IActionResult> Get([FromQuery] GetUserByFilterQuery query)
         {
             var response = await _requestContext.QueryAsync(query);
+            return Ok(response);
+        }
+
+        [HttpPost("image/upload")]
+        [ProducesResponseType(typeof(GetUserQueryResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> UploadImage([FromForm] ImageUploadCommand command)
+        {
+            var response = await _requestContext.ProcessAsync(command);
             return Ok(response);
         }
     }

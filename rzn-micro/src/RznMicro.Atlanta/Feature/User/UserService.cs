@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using RznMicro.Atlanta.Core.AWS.S3;
+using RznMicro.Atlanta.Core.AWS.S3.Request;
 using RznMicro.Atlanta.Feature.Address.Model;
 using RznMicro.Atlanta.Feature.Address.Result;
 using RznMicro.Atlanta.Feature.User.Model;
@@ -13,11 +15,16 @@ public class UserService : IUserService
 {
     private readonly IMapper _mapper;
     private readonly IUserUnitOfWork _uow;
+    private readonly IAwsS3Service _awsS3Service;
 
-    public UserService(IMapper mapper, IUserUnitOfWork uow)
+    public UserService(
+        IMapper mapper,
+        IUserUnitOfWork uow,
+        IAwsS3Service awsS3Service)
     {
         _mapper = mapper;
         _uow = uow;
+        _awsS3Service = awsS3Service;
     }
 
     public async Task<AddUserResult> AddAsync(AddUserRequest request)
@@ -67,5 +74,33 @@ public class UserService : IUserService
 
         if (age < 18)
             throw new Exception("User cannot be underage");
+    }
+
+    public async Task<ImageUploadResult> ImageUploadAsync(ImageUploadRequest request)
+    {
+        //var user = await _uow.UserRepository.GetByIdAsync(request.IdUser);
+
+        //if (user is null)
+        //    return null;
+
+        var upload = await _awsS3Service.PutObjectAsync(new AwsS3Request
+        {
+            BucketName = request.BucketName,
+            ImageName = request.ImageName,
+            File = request.File
+        });
+
+        //user.AvatarKeyName = upload.ImageKey;
+        //user.AvatarUrl = upload.Url;
+
+        //await _uow.CommitAsync();
+
+        var result = new ImageUploadResult
+        {
+            ImageKey = upload.ImageKey,
+            Url = upload.Url,
+        };
+
+        return result;
     }
 }

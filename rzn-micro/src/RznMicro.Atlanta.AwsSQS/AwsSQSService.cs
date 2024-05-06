@@ -3,20 +3,20 @@ using Amazon.Runtime;
 using Amazon.SQS;
 using Amazon.SQS.Model;
 using Microsoft.Extensions.Options;
-using RznMicro.Atlanta.Core;
 using RznMicro.Atlanta.Core.AppSetting;
+using RznMicro.Atlanta.Core.AWS.SQS;
 using RznMicro.Atlanta.Core.RequestContext;
 using System.Text.Json;
 
 namespace RznMicro.Atlanta.AwsSQS;
 
-public class PublisherQueue : IPublisherQueue
+public class AwsSQSService : IAwsSQSService
 {
     private readonly BasicAWSCredentials _credentials;
     private readonly AmazonSQSClient _client;
     private readonly AppSettings _appSettings;
 
-    public PublisherQueue(IOptions<AppSettings> appSettings)
+    public AwsSQSService(IOptions<AppSettings> appSettings)
     {
         _appSettings = appSettings.Value;
         _credentials = new BasicAWSCredentials(_appSettings.AWS.Credentials.AccessKey, _appSettings.AWS.Credentials.SecretAccessKey);
