@@ -11,8 +11,8 @@ namespace RznMicro.Atlanta.Feature.User.Model
         public bool? Active { get; set; }
         public GenderEnum Gender{ get; set; }
 
-        public string AvatarUrl { get; set; }
-        public string AvatarKeyName { get; set; }
+        //public string AvatarUrl { get; set; }
+        //public string AvatarKeyName { get; set; }
 
         // EF Relations
         public UserEntity() { }

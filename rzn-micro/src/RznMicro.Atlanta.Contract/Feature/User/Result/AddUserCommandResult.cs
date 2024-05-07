@@ -6,6 +6,8 @@ namespace RznMicro.Atlanta.Contract.Feature.User.Result;
 
 public class AddUserCommandResult : ICommandResult
 {
+    public string Source { get; private set; } = "AWS.RDS.MySQL";
+
     public UserResult User { get; set; }
     public AddressResult Address { get; set; }
 }

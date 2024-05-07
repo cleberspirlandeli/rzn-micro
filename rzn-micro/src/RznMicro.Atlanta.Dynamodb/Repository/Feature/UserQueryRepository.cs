@@ -17,7 +17,7 @@ public class UserQueryRepository : GenericDynamoDBContext, IUserQueryRepository
 
     public async Task<UserSchema> GetByIdAsync(Guid id)
     {
-        var result = await _dynamoDBContext.LoadAsync<UserSchema>(id.ToString().ToUpper());
+        var result = await _dynamoDBContext.LoadAsync<UserSchema>(id.ToString());
         return result;
     }
 

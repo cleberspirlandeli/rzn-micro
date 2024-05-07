@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RznMicro.Atlanta.Database",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RznMicro.Atlanta.AwsSQS", "src\RznMicro.Atlanta.AwsSQS\RznMicro.Atlanta.AwsSQS.csproj", "{0AEBCE48-8439-40CE-AF3E-B1A803A752EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RznMicro.Atlanta.DynamoDB", "src\RznMicro.Atlanta.Dynamodb\RznMicro.Atlanta.DynamoDB.csproj", "{F1C167EA-52DB-474B-8E8B-719CA2E174AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RznMicro.Atlanta.DynamoDB", "src\RznMicro.Atlanta.Dynamodb\RznMicro.Atlanta.DynamoDB.csproj", "{F1C167EA-52DB-474B-8E8B-719CA2E174AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RznMicro.Atlanta.AwsS3", "src\RznMicro.Atlanta.AwsS3\RznMicro.Atlanta.AwsS3.csproj", "{061A5582-3082-41A5-A7E3-23DE2A2687D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{F1C167EA-52DB-474B-8E8B-719CA2E174AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1C167EA-52DB-474B-8E8B-719CA2E174AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1C167EA-52DB-474B-8E8B-719CA2E174AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{061A5582-3082-41A5-A7E3-23DE2A2687D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{061A5582-3082-41A5-A7E3-23DE2A2687D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{061A5582-3082-41A5-A7E3-23DE2A2687D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{061A5582-3082-41A5-A7E3-23DE2A2687D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +120,7 @@ Global
 		{790939A4-96ED-4484-922E-A05DFD826F24} = {95BF27E7-1BAE-4494-820F-109E0CFC100A}
 		{0AEBCE48-8439-40CE-AF3E-B1A803A752EB} = {6311355C-978C-40BC-A368-8A46FA15B5A3}
 		{F1C167EA-52DB-474B-8E8B-719CA2E174AB} = {95BF27E7-1BAE-4494-820F-109E0CFC100A}
+		{061A5582-3082-41A5-A7E3-23DE2A2687D9} = {6311355C-978C-40BC-A368-8A46FA15B5A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A282419D-E23B-48BF-A910-87834F3A25C0}
