@@ -41,7 +41,7 @@ public sealed class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand
         var request = _mapper.Map<UpdateUserCommand, UpdateUserRequest>(command);
         var result = await _userService.UpdateAsync(request);
 
-        var message = _mapper.Map<UpdateUserResult, AddUserMessage>(result);
+        var message = _mapper.Map<UpdateUserResult, UpdateUserMessage>(result);
         await _awsSqsService.PublishAsync(_appSettings.AWS.SQS.UpdateUser.QueueUrl, message);
 
         return _mapper.Map<UpdateUserCommandResult>(result);
@@ -85,4 +85,29 @@ UPDATE
     "typeOfAddress": 1
   }
 }
+
+
+{
+    "user" : {
+        "user": {
+            "id": "1ddaca2c-de2c-4972-b99f-3b7928ae9615",
+            "fullName": "Teste Update Lambda",
+            "dateBirth": "2000-01-01",
+            "active": true,
+            "gender": 1,
+            "fullNameSearch" : "TESTE UPDATE LAMBDA AWS",
+           },
+        "address": {
+            "id": "1ddaca2c-de2c-4972-b99f-3b7928ae9615",
+            "idUser": "1ddaca2c-de2c-4972-b99f-3b7928ae9615",
+            "zipCode": "10000001",
+            "street": "Rua update LAMBDA SQS",
+            "number": 1010,
+            "additionalInformation": "AdditionalInformation teste update lambda sqs",
+            "typeOfAddress": 1
+        }
+    }
+}
+
+"{\"User\":{\"User\":{\"Id\":\"1ddaca2c-de2c-4972-b99f-3b7928ae9615\",\"FullName\":\"Name Teste All Endpoints\",\"DateBirth\":\"2000-01-01T00:00:00\",\"Active\":true,\"Gender\":0},\"Address\":{\"Id\":\"ae77da95-f638-4d92-a4fc-e9652f79808e\",\"IdUser\":\"3e438a26-8023-492e-8fa6-6a18c80a8b8d\",\"ZipCode\":\"10000001\",\"Street\":\"Rua All Endpoints\",\"Number\":10,\"AdditionalInformation\":\"AdditionalInformation All Endpoints\",\"TypeOfAddress\":1}}}",
 */

@@ -24,11 +24,13 @@ public sealed class GetUserByFilterQueryHandler : IQueryHandler<GetUserByFilterQ
 
     public async Task<GetUserByFilterQueryResult> Handle(GetUserByFilterQuery query, CancellationToken cancellationToken)
     {
+        // TODO: Implement pagination
         var request = new GetAllByFilterQueryRequest
         {
             IdUser = query.IdUser,
             IdAddress = query.IdAddress,
             FullName = query.FullName,
+            //Skip
         };
 
         var userList = await _userQueryRepository.GetAllByFilterAsync(request);
