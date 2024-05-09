@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace RznMicro.Atlanta.Database.Repository.Base;
 
-public abstract class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity>, IDisposable
+public abstract class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity>
     where TEntity : Entity, new()
     where TContext : DbContext
 {
@@ -197,8 +197,4 @@ public abstract class GenericRepository<TEntity, TContext> : IGenericRepository<
     }
     #endregion
 
-    public void Dispose()
-    {
-        _context?.Dispose();
-    }
 }

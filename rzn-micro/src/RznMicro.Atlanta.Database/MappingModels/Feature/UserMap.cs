@@ -31,6 +31,16 @@ public class UserMap : IEntityTypeConfiguration<UserEntity>
             .IsRequired()
             .HasConversion<int>();
 
+        builder
+            .Property(x => x.AvatarUrl)
+            .IsRequired(false)
+            .HasColumnType("varchar(500)");
+
+        builder
+            .Property(x => x.AvatarKeyName)
+            .IsRequired(false)
+            .HasColumnType("varchar(250)");
+
         // 1 : N => User : Address
         builder
             .HasMany(x => x.Address)

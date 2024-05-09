@@ -3,7 +3,7 @@ using RznMicro.Atlanta.Database.Feature;
 
 namespace RznMicro.Atlanta.Database.UnitOfWork.Base;
 
-public abstract class GenericUnitOfWork : IGenericUnitOfWork
+public abstract class GenericUnitOfWork : IGenericUnitOfWork, IDisposable
 {
     protected readonly IServiceProvider _serviceProvider;
     protected readonly DefaultDataBaseContext _context;
@@ -36,5 +36,10 @@ public abstract class GenericUnitOfWork : IGenericUnitOfWork
     public virtual void Rollback()
     {
         // if necessary add any information or track the information
+    }
+
+    public void Dispose()
+    {
+        _context?.Dispose();
     }
 }
