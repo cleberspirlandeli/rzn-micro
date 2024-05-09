@@ -98,18 +98,18 @@ public class UserService : IUserService
 
         var upload = await _awsS3Service.PutObjectAsync(new AwsS3Request
         {
+            File = request.File,
             BucketName = request.BucketName,
-            ImageName = request.ImageName,
-            File = request.File
         });
 
-        //userEntity.AvatarKeyName = upload.ImageKey;
-        //userEntity.AvatarUrl = upload.Url;
-        //_uow.UserRepository.Edit(entity);
-        //await _uow.CommitAsync();
+        userEntity.AvatarKeyName = upload.ImageKey;
+        userEntity.AvatarUrl = upload.Url;
+        _uow.UserRepository.Edit(userEntity);
+        await _uow.CommitAsync();
 
         var result = new ImageUploadResult
         {
+            IdUser = userEntity.Id,
             ImageKey = upload.ImageKey,
             Url = upload.Url,
         };

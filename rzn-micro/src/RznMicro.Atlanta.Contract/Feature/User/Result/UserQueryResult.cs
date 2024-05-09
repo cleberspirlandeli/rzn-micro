@@ -19,4 +19,10 @@ public record UserQueryResult
 
     [JsonPropertyName("gender")]
     public GenderEnum? Gender { get; set; }
+
+    [JsonPropertyName("avatarUrl")]
+    public string AvatarUrl { get; set; }
+
+    [JsonPropertyName("avatarKeyName")]
+    public string AvatarKeyName { get; set; }
 }

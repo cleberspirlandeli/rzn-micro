@@ -44,6 +44,8 @@ public sealed class GetUserByFilterQueryHandler : IQueryHandler<GetUserByFilterQ
                 DateBirth = DateTime.ParseExact(x.DateBirth, "yyyy/MM/dd", CultureInfo.InvariantCulture),
                 Active = x.Active,
                 Gender = x?.Gender is not null ? (GenderEnum)x.Gender : null,
+                AvatarUrl = x?.AvatarUrl,
+                AvatarKeyName = x?.AvatarKeyName,
             },
             Address = new AddressQueryResult
             {

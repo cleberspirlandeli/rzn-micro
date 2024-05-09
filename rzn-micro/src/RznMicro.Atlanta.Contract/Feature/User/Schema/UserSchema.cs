@@ -1,5 +1,6 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
 using RznMicro.Atlanta.Core.SchemaDynamoDB;
+using System.Text.Json.Serialization;
 
 namespace RznMicro.Atlanta.Contract.Feature.User.Schema;
 
@@ -24,6 +25,12 @@ public record UserSchema : SchemaDynamoDB
 
     [DynamoDBProperty("gender")]
     public int? Gender { get; set; }
+
+    [DynamoDBProperty("avatarUrl")]
+    public string AvatarUrl { get; set; }
+
+    [DynamoDBProperty("avatarKeyName")]
+    public string AvatarKeyName { get; set; }
 
     [DynamoDBProperty("zipCode")]
     public string ZipCode { get; set; }

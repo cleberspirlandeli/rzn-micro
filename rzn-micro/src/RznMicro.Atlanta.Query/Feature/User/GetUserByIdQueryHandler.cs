@@ -34,6 +34,8 @@ public sealed class GetUserByIdQueryHandler : IQueryHandler<GetUserByIdQuery, Ge
                 DateBirth = DateTime.ParseExact(user.DateBirth, "yyyy/MM/dd", CultureInfo.InvariantCulture),
                 Active = user.Active,
                 Gender = user?.Gender is not null ? (GenderEnum)user.Gender : null,
+                AvatarUrl = user?.AvatarUrl,
+                AvatarKeyName = user?.AvatarKeyName,
             },
             Address = new AddressQueryResult
             {

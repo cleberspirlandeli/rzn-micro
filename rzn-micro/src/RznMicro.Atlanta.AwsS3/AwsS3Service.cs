@@ -12,7 +12,7 @@ namespace RznMicro.Atlanta.AwsS3;
 
 public class AwsS3Service : IAwsS3Service
 {
-    private const int MaximumSizeInKb = 5 * 1024 * 1024; // 5 MB in bytes
+    private const int MaximumSizeInKb = 1 * 1024 * 1024; // 1 MB in bytes
     private static readonly string[] AllowedFormats = { ".jpg", ".jpeg", ".png" };
     private readonly AppSettings _appSettings;
     private readonly AmazonS3Client _amazonS3Client;
@@ -63,13 +63,12 @@ public class AwsS3Service : IAwsS3Service
 
     private string GenerateKey(IFormFile file)
     {
-        var guid = Guid.NewGuid().ToString();
-        string[] parts = guid.Split('-');
-
-        string extension = Path.GetExtension(file.FileName).ToLower();
+        var timestampInMilliseconds = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeMilliseconds();
+        var extension = Path.GetExtension(file.FileName).ToLower();
         var nameParts = file.FileName.Split(extension);
+        string name = nameParts[0].Replace(" ", "_").ToLower();
 
-        return $"{nameParts[0]}-{parts[0]}{parts[1]}{extension}";
+        return $"{name}-{timestampInMilliseconds}{extension}";
     }
 
     private bool ValidateSizeOfImage(IFormFile file)

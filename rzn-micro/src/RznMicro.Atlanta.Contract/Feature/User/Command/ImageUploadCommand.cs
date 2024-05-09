@@ -6,7 +6,6 @@ namespace RznMicro.Atlanta.Contract.Feature.User.Command;
 
 public class ImageUploadCommand : ICommand<ImageUploadCommandResult>
 {
-    //public Guid? IdUser { get; set; }
-    //public string Name { get; set; } = string.Empty;
+    public Guid IdUser { get; set; }
     public IFormFile Image { get; set; }
 }
