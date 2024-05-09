@@ -2,7 +2,7 @@
 
 namespace RznMicro.Atlanta.Contract.Feature.User.Request;
 
-public class UserCommandRequest
+public class AddUserCommandRequest
 {
     public string FullName { get; set; }
     public DateTime DateBirth { get; set; }

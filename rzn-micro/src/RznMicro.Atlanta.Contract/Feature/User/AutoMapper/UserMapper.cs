@@ -3,7 +3,6 @@ using RznMicro.Atlanta.Contract.Feature.User.Command;
 using RznMicro.Atlanta.Contract.Feature.User.Message;
 using RznMicro.Atlanta.Contract.Feature.User.Request;
 using RznMicro.Atlanta.Contract.Feature.User.Result;
-using RznMicro.Atlanta.Contract.Feature.User.Schema;
 using RznMicro.Atlanta.Feature.Address.Result;
 using RznMicro.Atlanta.Feature.User.Model;
 using RznMicro.Atlanta.Feature.User.Request;
@@ -15,8 +14,11 @@ public class UserMapper : Profile
 {
     public UserMapper()
     {
-        // Command Handler
+        #region Command Handler
+        // ADD
         CreateMap<AddUserCommand, AddUserRequest>().ReverseMap();
+        CreateMap<AddUserCommandRequest, AddUserRequest>().ReverseMap();
+
         CreateMap<AddUserResult, AddUserCommandResult>().ReverseMap();
         CreateMap<AddUserResult, AddUserMessage>()
             .ForPath(
@@ -42,13 +44,59 @@ public class UserMapper : Profile
                 TypeOfAddress = s.Address.TypeOfAddress,
             }));
 
-        // Service
-        CreateMap<UserCommandRequest, UserRequest>().ReverseMap();
-        CreateMap<UserRequest, UserEntity>().ReverseMap();
-        CreateMap<UserEntity, UserResult>().ReverseMap();
-        CreateMap<UserEntity, UserResult>().ReverseMap();
+        // UPDATE
+        CreateMap<UpdateUserCommand, UpdateUserRequest>().ReverseMap();
+        CreateMap<UpdateUserResult, UpdateUserCommandResult>().ReverseMap();
+        CreateMap<UpdateUserResult, UpdateUserMessage>()
+            .ForPath(
+            dest => dest.User.User,
+            src => src.MapFrom(s => new UserResult
+            {
+                Id = s.User.Id,
+                FullName = s.User.FullName,
+                DateBirth = s.User.DateBirth,
+                Active = s.User.Active,
+                Gender = s.User.Gender,
+            }))
+            .ForPath(
+            dest => dest.User.Address,
+            src => src.MapFrom(s => new AddressResult
+            {
+                Id = s.Address.Id,
+                IdUser = s.Address.IdUser,
+                Street = s.Address.Street,
+                Number = s.Address.Number,
+                ZipCode = s.Address.ZipCode,
+                AdditionalInformation = s.Address.AdditionalInformation,
+                TypeOfAddress = s.Address.TypeOfAddress,
+            }));
 
-        // TODO: Create AutoMapper for DynamoDB
-        //CreateMap<List<UserSchema>, GetUserByFilterQueryResult>();
+        // DELETE
+        CreateMap<DeleteUserCommand, DeleteUserRequest>().ReverseMap();
+        CreateMap<DeleteUserResult, DeleteUserCommandResult>().ReverseMap();
+        CreateMap<DeleteUserResult, DeleteUserMessage>()
+            .ForPath(
+            dest => dest.IdUser, 
+            src => src.MapFrom(s => s.User.Id))
+            .ForPath(
+            dest => dest.IdAddress,
+            src => src.MapFrom(s => s.Address.Id));
+        
+        #endregion
+
+        #region Service
+        // Add
+        CreateMap<AddUserCommandRequest, AddUserDtoRequest>().ReverseMap();
+        CreateMap<AddUserDtoRequest, UserEntity>().ReverseMap();
+
+        // Update
+        CreateMap<UpdateUserCommandRequest, UpdateUserDtoRequest>().ReverseMap();
+        CreateMap<UpdateUserDtoRequest, UserEntity>().ReverseMap();
+
+        // Delete
+        CreateMap<DeleteUserResult, UserEntity>().ReverseMap();
+
+        CreateMap<UserEntity, UserResult>().ReverseMap();
+        #endregion
     }
 }

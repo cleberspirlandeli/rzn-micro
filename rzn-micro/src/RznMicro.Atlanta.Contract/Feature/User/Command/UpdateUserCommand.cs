@@ -5,8 +5,8 @@ using RznMicro.Atlanta.Core.RequestContext;
 
 namespace RznMicro.Atlanta.Contract.Feature.User.Command;
 
-public class AddUserCommand : ICommand<AddUserCommandResult>
+public class UpdateUserCommand : ICommand<UpdateUserCommandResult>
 {
-    public AddUserCommandRequest User { get; set; }
-    public AddAddressCommandRequest Address { get; set; }
+    public UpdateUserCommandRequest User { get; set; }
+    public UpdateAddressCommandRequest Address { get; set; }
 }

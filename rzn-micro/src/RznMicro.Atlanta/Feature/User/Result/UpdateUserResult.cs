@@ -2,7 +2,7 @@
 
 namespace RznMicro.Atlanta.Feature.User.Result;
 
-public class DeleteUserResult
+public class UpdateUserResult
 {
     public UserResult User { get; set; }
     public AddressResult Address { get; set; }

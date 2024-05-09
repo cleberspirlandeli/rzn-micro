@@ -75,6 +75,8 @@ public interface IGenericRepository<TEntity> where TEntity : Entity
     #region Edit
     void Edit(TEntity entity, string propertyName);
     void Edit(TEntity entity, string[] propertiesName);
+    void Edit(TEntity entity);
+    void Update(TEntity entity);
     #endregion
 
     #region Delete

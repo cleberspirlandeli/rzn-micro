@@ -1,4 +1,5 @@
-﻿using RznMicro.Atlanta.Database.Feature;
+﻿using Microsoft.EntityFrameworkCore;
+using RznMicro.Atlanta.Database.Feature;
 using RznMicro.Atlanta.Database.Repository.Base;
 using RznMicro.Atlanta.Feature.User;
 using RznMicro.Atlanta.Feature.User.Model;
@@ -14,6 +15,8 @@ public class UserRepository : GenericRepository<UserEntity, DefaultDataBaseConte
     /// </summary>
     /// <param name="active">bool</param>
     /// <returns>IQueryable<UserModel></returns>
-    public IQueryable<UserEntity> GetByActive(bool active) => 
-        _context.User.Where(x => x.Active == active);
+    public IQueryable<UserEntity> GetUserAndAddress(Guid id) => 
+        _context.User
+            .Where(x => x.Id == id)
+            .Include(x => x.Address);
 }

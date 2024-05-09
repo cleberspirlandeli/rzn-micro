@@ -24,7 +24,7 @@ public class UserFixture : IDisposable
         return new Faker<AddUserRequest>("pt_BR")
             .CustomInstantiator(f => new AddUserRequest
             {
-                User = new UserRequest
+                User = new AddUserDtoRequest
                 {
                     FullName = f.Name.FirstName(),
                     DateBirth = f.Date.Past(10)
@@ -33,10 +33,10 @@ public class UserFixture : IDisposable
             .Generate();
     }
 
-    public AlterUserRequest GenerateAlterUserRequest()
+    public UpdateUserRequest GenerateUpdateUserRequest()
     {
-        return new Faker<AlterUserRequest>("pt_BR")
-            .CustomInstantiator(f => new AlterUserRequest())
+        return new Faker<UpdateUserRequest>("pt_BR")
+            .CustomInstantiator(f => new UpdateUserRequest())
             .Generate();
     }
 

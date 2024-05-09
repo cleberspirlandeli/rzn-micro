@@ -35,7 +35,7 @@ public class UserQueryRepository : GenericDynamoDBContext, IUserQueryRepository
         var conditions = new List<ScanCondition>();
 
         if (request.IdUser is not null)
-            conditions.Add(new ScanCondition(nameof(UserSchema.IdUser), ScanOperator.Equal, request.IdUser?.ToString().ToUpper()));
+            conditions.Add(new ScanCondition(nameof(UserSchema.IdUser), ScanOperator.Equal, request.IdUser?.ToString()));
 
         if (request.IdAddress is not null)
             conditions.Add(new ScanCondition(nameof(UserSchema.IdAddress), ScanOperator.Equal, request.IdAddress?.ToString().ToUpper()));

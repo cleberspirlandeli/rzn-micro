@@ -1,5 +1,4 @@
-﻿using RznMicro.Atlanta.Core.RequestContext;
-using RznMicro.Atlanta.Feature.Address.Result;
+﻿using RznMicro.Atlanta.Feature.Address.Result;
 
 namespace RznMicro.Atlanta.Feature.User.Result;
 

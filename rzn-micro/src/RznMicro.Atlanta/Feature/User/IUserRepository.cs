@@ -10,5 +10,5 @@ public interface IUserRepository : IGenericRepository<UserEntity>
     /// </summary>
     /// <param name="active">bool</param>
     /// <returns>IQueryable<UserModel></returns>
-    IQueryable<UserEntity> GetByActive(bool active);
+    IQueryable<UserEntity> GetUserAndAddress(Guid id);
 }

@@ -1,8 +1,8 @@
 ﻿using RznMicro.Atlanta.Enumerable;
 
-namespace RznMicro.Atlanta.Feature.Address.Request;
+namespace RznMicro.Atlanta.Contract.Feature.Address.Request;
 
-public class AddressRequest
+public class AddAddressCommandRequest
 {
     public string ZipCode { get; set; }
     public string Street { get; set; }

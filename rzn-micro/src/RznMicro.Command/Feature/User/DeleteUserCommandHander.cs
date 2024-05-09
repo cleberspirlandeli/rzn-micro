@@ -13,19 +13,18 @@ using RznMicro.Atlanta.Feature.User.Result;
 
 namespace RznMicro.Atlanta.Command.Feature.User;
 
-public sealed class AddUserCommandHandler : ICommandHandler<AddUserCommand, AddUserCommandResult>
+public sealed class DeleteUserCommandHander : ICommandHandler<DeleteUserCommand, DeleteUserCommandResult>
 {
     private readonly IUserService _userService;
     private readonly IMapper _mapper;
     private readonly IAwsSQSService _awsSqsService;
     private readonly AppSettings _appSettings;
 
-    public AddUserCommandHandler(
+    public DeleteUserCommandHander(
         IUserService userService,
         IMapper mapper,
         IAwsSQSService awsSqsService,
-        IOptions<AppSettings> appSettings
-        )
+        IOptions<AppSettings> appSettings)
     {
         _userService = userService;
         _mapper = mapper;
@@ -33,17 +32,17 @@ public sealed class AddUserCommandHandler : ICommandHandler<AddUserCommand, AddU
         _appSettings = appSettings.Value;
     }
 
-    public async Task<AddUserCommandResult> Handle(AddUserCommand command, CancellationToken cancellationToken)
+    public async Task<DeleteUserCommandResult> Handle(DeleteUserCommand command, CancellationToken cancellationToken)
     {
-        var validation = new AddUserCommandValidator().Validate(command);
+        var validation = new DeleteUserCommandValidator().Validate(command);
         if (!validation.IsValid) return null;
 
-        var request = _mapper.Map<AddUserCommand, AddUserRequest>(command);
-        var result = await _userService.AddAsync(request);
+        var request = _mapper.Map<DeleteUserCommand, DeleteUserRequest>(command);
+        var result = await _userService.DeleteAsync(request);
 
-        var message = _mapper.Map<AddUserResult, AddUserMessage>(result);
-        await _awsSqsService.PublishAsync(_appSettings.AWS.SQS.AddUser.QueueUrl, message);
+        var message = _mapper.Map<DeleteUserResult, DeleteUserMessage>(result);
+        await _awsSqsService.PublishAsync(_appSettings.AWS.SQS.RemoveUser.QueueUrl, message);
 
-        return _mapper.Map<AddUserCommandResult>(result);
+        return _mapper.Map<DeleteUserCommandResult>(result);
     }
 }

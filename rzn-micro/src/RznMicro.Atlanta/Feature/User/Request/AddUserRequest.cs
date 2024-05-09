@@ -4,6 +4,6 @@ namespace RznMicro.Atlanta.Feature.User.Request;
 
 public class AddUserRequest
 {
-    public UserRequest User { get; set; }
-    public AddressRequest Address { get; set; }
+    public AddUserDtoRequest User { get; set; }
+    public AddAddressDtoRequest Address { get; set; }
 }

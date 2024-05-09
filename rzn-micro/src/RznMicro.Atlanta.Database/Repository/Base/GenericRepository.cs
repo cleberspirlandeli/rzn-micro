@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RznMicro.Atlanta.Common;
+using System.Reflection;
 
 namespace RznMicro.Atlanta.Database.Repository.Base;
 
@@ -132,6 +133,29 @@ public abstract class GenericRepository<TEntity, TContext> : IGenericRepository<
             foreach (var property in propertiesName)
                 Edit(entity, property);
         }
+    }
+    
+    public void Edit(TEntity entity)
+    {
+        if (_context.Entry(entity).State == EntityState.Detached)
+            _context.Attach(entity);
+
+        var modifiedProperties = _context.Entry(entity)
+                .Properties
+                .Where(p => p.IsModified)
+                .Select(p => p.Metadata.Name)
+                .ToList();
+
+        foreach (PropertyInfo propertyInfo in typeof(TEntity).GetProperties())
+        {
+            if (modifiedProperties.Contains(propertyInfo.Name))
+                _context.Entry(entity).Property(propertyInfo.Name).IsModified = true;
+        }
+    }
+
+    public void Update(TEntity entity)
+    {
+        _context.Update(entity);
     }
     #endregion
 

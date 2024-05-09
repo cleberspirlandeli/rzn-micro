@@ -31,6 +31,31 @@ namespace A.API.Controllers
             return Ok(response);
         }
 
+        [HttpPut("{idUser:guid}/{idAddress:guid}")]
+        [ProducesResponseType(typeof(UpdateUserCommandResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Update([FromRoute] Guid idUser, [FromRoute] Guid idAddress, [FromBody] UpdateUserCommand command)
+        {
+            command.User.SetId(idUser);
+            command.Address.SetId(idAddress);
+
+            var response = await _requestContext.ProcessAsync(command);
+            return Ok(response);
+        }
+
+        [HttpDelete("{idUser:guid}")]
+        [ProducesResponseType(typeof(DeleteUserCommandResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<IActionResult> Update([FromRoute] Guid idUser, [FromRoute] DeleteUserCommand command)
+        {
+            command.SetId(idUser);
+            
+            var response = await _requestContext.ProcessAsync(command);
+            return Ok(response);
+        }
+
         [HttpGet("id:guid")]
         [ProducesResponseType(typeof(GetUserQueryResult), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
@@ -42,7 +67,7 @@ namespace A.API.Controllers
         }        
         
         [HttpGet("")]
-        [ProducesResponseType(typeof(GetUserQueryResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(GetUserByFilterQueryResult), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> Get([FromQuery] GetUserByFilterQuery query)
@@ -52,7 +77,7 @@ namespace A.API.Controllers
         }
 
         [HttpPost("image/upload")]
-        [ProducesResponseType(typeof(GetUserQueryResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ImageUploadCommandResult), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<IActionResult> UploadImage([FromForm] ImageUploadCommand command)
