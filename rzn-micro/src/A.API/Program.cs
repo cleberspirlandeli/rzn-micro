@@ -27,6 +27,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// AWS Parameter Store
+var envName = builder.Environment.EnvironmentName;
+builder.Configuration.AddSystemsManager($"/{envName}", TimeSpan.FromMinutes(1));
+
 // RequestContext MediatR
 builder.Services.AddScoped<IRequestContext, RequestContext>();
 builder.Services.AddApplicationCommand();
@@ -65,11 +69,15 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+// Use this format only example of my applications
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
