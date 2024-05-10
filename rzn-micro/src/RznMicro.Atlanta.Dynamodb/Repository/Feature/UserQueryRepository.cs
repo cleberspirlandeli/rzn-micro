@@ -38,10 +38,10 @@ public class UserQueryRepository : GenericDynamoDBContext, IUserQueryRepository
             conditions.Add(new ScanCondition(nameof(UserSchema.IdUser), ScanOperator.Equal, request.IdUser?.ToString()));
 
         if (request.IdAddress is not null)
-            conditions.Add(new ScanCondition(nameof(UserSchema.IdAddress), ScanOperator.Equal, request.IdAddress?.ToString().ToUpper()));
+            conditions.Add(new ScanCondition(nameof(UserSchema.IdAddress), ScanOperator.Equal, request.IdAddress?.ToString()));
 
         if (!string.IsNullOrEmpty(request.FullName))
-            conditions.Add(new ScanCondition(nameof(UserSchema.FullNameSearch), ScanOperator.Contains, request.FullName.ToString().ToUpper()));
+            conditions.Add(new ScanCondition(nameof(UserSchema.FullNameSearch), ScanOperator.Contains, request.FullName.ToUpper()));
 
         return conditions;
     }

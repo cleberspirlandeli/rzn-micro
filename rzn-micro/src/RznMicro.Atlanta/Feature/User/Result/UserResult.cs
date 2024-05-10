@@ -9,4 +9,6 @@ public class UserResult
     public DateTime DateBirth { get; set; }
     public bool? Active { get; set; }
     public GenderEnum Gender { get; set; }
+    public string AvatarUrl { get; set; }
+    public string AvatarKeyName { get; set; }
 }
