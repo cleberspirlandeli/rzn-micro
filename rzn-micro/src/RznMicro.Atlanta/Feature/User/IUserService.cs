@@ -10,4 +10,5 @@ public interface IUserService
     Task<DeleteUserResult> DeleteAsync(DeleteUserRequest request);
 
     Task<ImageUploadResult> ImageUploadAsync(ImageUploadRequest request);
+    Task DeleteImageUploadAsync(string bucketName, string key);
 }

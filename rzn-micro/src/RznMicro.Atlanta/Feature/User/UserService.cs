@@ -117,6 +117,15 @@ public class UserService : IUserService
         return result;
     }
 
+    public async Task DeleteImageUploadAsync(string bucketName, string key)
+    {
+        await _awsS3Service.DeleteObjectAsync(new AwsS3Request
+        {
+            BucketName = bucketName,
+            Key = key
+        });
+    }
+
     internal bool ExampleMethodInternal() => true;
 
     private void ValidateAgeOver18YearsOld(DateTime dateBirth)
@@ -163,4 +172,5 @@ public class UserService : IUserService
         if (addressEntity is null)
             throw new Exception("Address not exists");
     }
+
 }
