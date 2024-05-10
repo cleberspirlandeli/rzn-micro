@@ -39,6 +39,7 @@ public sealed class DeleteUserCommandHander : ICommandHandler<DeleteUserCommand,
 
         var request = _mapper.Map<DeleteUserCommand, DeleteUserRequest>(command);
         var result = await _userService.DeleteAsync(request);
+        await _userService.DeleteImageUploadAsync(_appSettings.AWS.S3.BucketName, result.User.AvatarKeyName);
 
         var message = _mapper.Map<DeleteUserResult, DeleteUserMessage>(result);
         await _awsSqsService.PublishAsync(_appSettings.AWS.SQS.DeleteUser.QueueUrl, message);

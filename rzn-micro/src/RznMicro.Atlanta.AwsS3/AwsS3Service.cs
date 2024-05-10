@@ -58,6 +58,30 @@ public class AwsS3Service : IAwsS3Service
         return result;
     }
 
+    public async Task DeleteObjectAsync(AwsS3Request request)
+    {
+        try
+        {
+            var deleteObjectRequest = new DeleteObjectRequest
+            {
+                BucketName = request.BucketName,
+                Key = request.Key
+            };
+
+            await _amazonS3Client.DeleteObjectAsync(deleteObjectRequest);
+        }
+        catch (AmazonS3Exception e)
+        {
+            // TODO:
+            //Console.WriteLine($"Erro encontrado ao tentar deletar a imagem {key} do bucket {bucketName}: {e.Message}");
+        }
+        catch (Exception e)
+        {
+            // TODO:
+            //Console.WriteLine($"Ocorreu um erro inesperado: {e.Message}");
+        }
+    }
+
     private string GenerateUrl(string bucketName, string imageKey) =>
         $"https://s3.amazonaws.com/{bucketName}/{imageKey}";
 
@@ -84,11 +108,11 @@ public class AwsS3Service : IAwsS3Service
 
     private bool ValidateAllowedFormats(IFormFile file)
     {
-        if(!file.ContentType.StartsWith("image/"))
+        if (!file.ContentType.StartsWith("image/"))
             return false;
 
         string extension = Path.GetExtension(file.FileName).ToLower();
-        if(!AllowedFormats.Contains(extension))
+        if (!AllowedFormats.Contains(extension))
             return false;
 
         return true;

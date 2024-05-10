@@ -6,4 +6,5 @@ public record AwsS3Request
 {
     public IFormFile File { get; set; }
     public string BucketName { get; set; }
+    public string Key { get; set; }
 }
