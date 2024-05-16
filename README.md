@@ -17,6 +17,15 @@
 
 <br />
 
+![image](https://github.com/cleberspirlandeli/rzn-micro/blob/main/Diagrams/MicroRZN-FlowApplication-API%20Applications.drawio.png)
+
+<br />
+
+![image](https://github.com/cleberspirlandeli/rzn-micro/blob/main/Diagrams/MicroRZN-FlowApplication-API%20Applications.drawio.svg)
+
+<br />
+
+
 Objective:
 - Implement a microservices structure using good development practices for a system that does not have problems with database competitiveness.
 - One of the solutions used is the `Command` and `Query` Responsibility Segregation (CQRS) standard.
