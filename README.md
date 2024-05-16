@@ -8,7 +8,7 @@
 
 <br />
 
-### [`Lambda`](https://github.com/cleberspirlandeli/rzn-micro-lambda)
+### [`AWS Lambda`](https://github.com/cleberspirlandeli/rzn-micro-lambda)
 
 
 <br />
@@ -18,6 +18,16 @@
 <br />
 
 Objective:
+- Implement a microservices structure using good development practices for a system that does not have problems with database competitiveness.
+- One of the solutions used is the `Command` and `Query` Responsibility Segregation (CQRS) standard.
+- The relational database `MySQL` was used for `Insert`, `Update` and `Delete`.
+- The non-relational database `DynamoDB` was used for `Select`.
+- To keep data up to date across databases. `AWS Simple Queue Service (SQS)` queues were used.
+- SQS Queue Consumers is an `AWS Lambda` serverless, event-driven compute service.
+
+<br />
+
+Details:
 - .NET Core `7.0` and .NET Core `8.0`.
 - Create a base structure, separating responsibilities based on `Domain Driven Design (DDD)`.
 - Create a base structure, separating responsibilities based on `Event-Drive Architecture`.
@@ -34,5 +44,7 @@ Objective:
 - Automated tests with `Mock` and `AutoMock`.
 - TODO - Integration with another API using `HTTP`
 - TODO - Integration with another API using `GRPc`
+- TODO - Implements the cache with `Redis`
 - TODO - Presentation of monitoring information in graphs with `Grafana`
 - TODO - Deploy the application in `ECS` on `AWS`
+- 
