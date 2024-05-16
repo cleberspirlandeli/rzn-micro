@@ -17,10 +17,6 @@
 
 <br />
 
-![image](https://github.com/cleberspirlandeli/rzn-micro/blob/main/Diagrams/MicroRZN-FlowApplication-API%20Applications.drawio.png)
-
-<br />
-
 ![image](https://github.com/cleberspirlandeli/rzn-micro/blob/main/Diagrams/MicroRZN-FlowApplication-API%20Applications.drawio.svg)
 
 <br />
